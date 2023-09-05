@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>st.cri.app</groupId>
-	<artifactId>proyecto-base</artifactId>
+	<artifactId>sum-app</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>proyecto-base</name>
+	<name>sum-app</name>
 	<description>Template for Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>
