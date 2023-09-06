@@ -1,6 +1,7 @@
 package st.cri.app.service;
 
 import org.springframework.stereotype.Service;
+import st.cri.app.exception.NotAvailableException;
 
 import java.util.concurrent.TimeUnit;
 
@@ -58,7 +59,7 @@ public class SumService {
         if (lastValidPercentage != -1) {
             return calculateSumWithPercentage(a, b, lastValidPercentage);
         } else {
-            throw new RuntimeException("No external percentage available"); // Excepción en caso de fallo persistente.
+            throw new NotAvailableException("No external percentage available"); // Excepción en caso de fallo persistente.
         }
     }
 

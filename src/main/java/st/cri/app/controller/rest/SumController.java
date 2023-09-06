@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import st.cri.app.controller.util.RateLimiter;
+import st.cri.app.exception.NotAvailableException;
 import st.cri.app.service.CallHistoryService;
 import st.cri.app.service.SumService;
 
@@ -39,11 +40,16 @@ public class SumController {
                     .body("Se ha superado el límite de request por minuto. Intente nuevamente más tarde.");
         }
 
-        final double result = sumService.calculateSumWithExternalPercentage(a, b);
+        try {
+            final double result = sumService.calculateSumWithExternalPercentage(a, b);
 
-        // Llama al servicio para guardar el historial de forma asincrónica
-        callHistoryService.saveCallHistory("/calculate", result);
+            // Llama al servicio para guardar el historial de forma asincrónica
+            callHistoryService.saveCallHistory("/calculate", result);
 
-        return ResponseEntity.ok(result);
+            return ResponseEntity.ok(result);
+        } catch (NotAvailableException e) {
+            return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE)
+                    .body("El servicio externo no está disponible. Intente nuevamente más tarde.");
+        }
     }
 }
