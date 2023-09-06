@@ -30,7 +30,8 @@ public class SumController {
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Suma exitosa"),
             @ApiResponse(code = 400, message = "Parámetros inválidos"),
-            @ApiResponse(code = 429, message = "Se ha superado el límite de request por minuto")
+            @ApiResponse(code = 429, message = "Se ha superado el límite de request por minuto"),
+            @ApiResponse(code = 503, message = "El servicio externo no está disponible")
     })
     public ResponseEntity<?> calculate(
             @ApiParam(value = "Primer número", required = true) @RequestParam(name = "a") int a,
