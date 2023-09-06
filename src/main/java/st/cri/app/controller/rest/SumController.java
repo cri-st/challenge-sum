@@ -1,9 +1,6 @@
 package st.cri.app.controller.rest;
 
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +11,7 @@ import st.cri.app.service.CallHistoryService;
 import st.cri.app.service.SumService;
 
 @RestController
+@Api(tags = "Suma y Porcentaje")
 public class SumController {
     private final SumService sumService;
     private final CallHistoryService callHistoryService;
@@ -27,7 +25,7 @@ public class SumController {
     }
 
     @GetMapping("/calculate")
-    @ApiOperation(value = "Calcula la suma con porcentaje estable", response = Double.class)
+    @ApiOperation(value = "Calcula la suma con porcentaje externo", response = Double.class)
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Suma exitosa"),
             @ApiResponse(code = 400, message = "Parámetros inválidos"),
@@ -41,7 +39,7 @@ public class SumController {
                     .body("Se ha superado el límite de request por minuto. Intente nuevamente más tarde.");
         }
 
-        double result = sumService.calculateSumWithStablePercentage(a, b);
+        final double result = sumService.calculateSumWithExternalPercentage(a, b);
 
         // Llama al servicio para guardar el historial de forma asincrónica
         callHistoryService.saveCallHistory("/calculate", result);

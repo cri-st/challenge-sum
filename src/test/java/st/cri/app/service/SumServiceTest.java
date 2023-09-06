@@ -86,7 +86,7 @@ class SumServiceTest {
         when(externalService.getPercentage()).thenReturn(10).thenReturn(20);
 
         // Realiza el primer cálculo con el servicio.
-        double result1 = sumService.calculateSumWithStablePercentage(5, 5);
+        double result1 = sumService.calculateSumWithExternalPercentage(5, 5);
         assertEquals(11.0, result1);
 
         // Verifica que se llamó a getPercentage una vez.
@@ -96,7 +96,7 @@ class SumServiceTest {
         sumService.setLastPercentageUpdateTime(System.currentTimeMillis() - 29 * 60 * 1000);
 
         // Realiza un segundo cálculo con el servicio.
-        double result2 = sumService.calculateSumWithStablePercentage(5, 5);
+        double result2 = sumService.calculateSumWithExternalPercentage(5, 5);
         assertEquals(11.0, result2); // Sigue devolviendo 10%
 
         // Verifica que no se haya llamado a getPercentage nuevamente.
@@ -106,7 +106,7 @@ class SumServiceTest {
         sumService.setLastPercentageUpdateTime(System.currentTimeMillis() - 31 * 60 * 1000);
 
         // Realiza un tercer cálculo con el servicio.
-        double result3 = sumService.calculateSumWithStablePercentage(5, 5);
+        double result3 = sumService.calculateSumWithExternalPercentage(5, 5);
         assertEquals(12.0, result3); // 20% en lugar de 10%
 
         // Verifica que se haya llamado a getPercentage nuevamente dos veces en total.

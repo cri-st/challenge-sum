@@ -21,7 +21,7 @@ public class SumService {
     }
 
     // Calcula la suma de 'a' y 'b' con un porcentaje establecido contemplando el valor en caché.
-    public double calculateSumWithStablePercentage(int a, int b) {
+    public double calculateSumWithExternalPercentage(int a, int b) {
         // Verificar si el valor en caché todavía es válido y no ha pasado el tiempo de 30 minutos.
         long currentTime = System.currentTimeMillis();
         if (currentTime - lastPercentageUpdateTime < CACHE_EXPIRATION_TIME && lastValidPercentage != -1) {

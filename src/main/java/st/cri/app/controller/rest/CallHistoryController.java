@@ -14,7 +14,7 @@ import st.cri.app.domain.CallHistory;
 import st.cri.app.repository.CallHistoryRepository;
 
 @RestController
-@Api(tags = "Call History")
+@Api(tags = "Historial de Llamadas")
 public class CallHistoryController {
     private final CallHistoryRepository callHistoryRepository;
 
